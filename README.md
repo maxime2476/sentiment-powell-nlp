@@ -256,9 +256,3 @@ WINDOW_SIZE = 5   # → changer ici uniquement
 - **2024–2025** : normalisation progressive, retour de `growth` et `stability`
 
 ---
-
-## Auteur
-
-**Maxime Gourguechon**  
-M2 Économie Appliquée  
-Cours : Analyse quantitative textuelle
