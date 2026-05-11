@@ -1,0 +1,110 @@
+# ============================================================
+# .gitignore — Analyse Textuelle FOMC
+# ============================================================
+
+# ------------------------------------
+# Python
+# ------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Environnements virtuels
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ------------------------------------
+# Jupyter
+# ------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+# Ne pas ignorer le notebook source
+!notebooks/analyse_fomc.ipynb
+
+# ------------------------------------
+# Données du corpus (trop lourd pour git)
+# ------------------------------------
+archive/
+data/
+*.txt
+
+# Mais garder le placeholder
+!archive/.gitkeep
+!data/.gitkeep
+
+# ------------------------------------
+# Sorties générées (reproductibles)
+# ------------------------------------
+outputs/figures/*.png
+outputs/tables/*.csv
+
+# Garder les dossiers vides
+!outputs/figures/.gitkeep
+!outputs/tables/.gitkeep
+
+# ------------------------------------
+# Documents Word (binaires lourds)
+# ------------------------------------
+*.docx
+*.doc
+
+# Garder le PDF du rapport
+!*.pdf
+
+# ------------------------------------
+# IDE & éditeurs
+# ------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ------------------------------------
+# NLTK data (téléchargé automatiquement)
+# ------------------------------------
+nltk_data/
+
+# ------------------------------------
+# Dépôts git imbriqués
+# ------------------------------------
+sentiment-powell-nlp/
+
+# ------------------------------------
+# Logs & temporaires
+# ------------------------------------
+*.log
+*.tmp
+*.bak
+.cache/
