@@ -5,10 +5,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
 ![pandas](https://img.shields.io/badge/pandas-2.0%2B-150458?style=flat-square&logo=pandas&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-1.25%2B-013243?style=flat-square&logo=numpy&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-3.7%2B-11557C?style=flat-square&logo=matplotlib&logoColor=white)
-![seaborn](https://img.shields.io/badge/seaborn-0.13%2B-4C72B0?style=flat-square)
 ![yfinance](https://img.shields.io/badge/yfinance-0.2%2B-purple?style=flat-square)
-![Jupyter](https://img.shields.io/badge/Jupyter-Lab-F37626?style=flat-square&logo=jupyter&logoColor=white)
 ![License](https://img.shields.io/badge/Licence-Académique-lightgrey?style=flat-square)
 
 > **Devoir Maison — M2 Économie Appliquée**  
