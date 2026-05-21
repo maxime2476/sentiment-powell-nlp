@@ -70,46 +70,47 @@ dm-analyse-textuelle-fomc/
 
 ## Pipeline NLP
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Corpus FOMC (.txt)                      │
-└─────────────────────────┬───────────────────────────────────┘
-                          │
-                    ┌─────▼─────┐
-                    │ 01 Prétraitement                         │
-                    │  • Tokenisation (alpha, lowercase)       │
-                    │  • POS tagging (Penn Treebank)           │
-                    │  • Lemmatisation (noms + adjectifs)      │
-                    │  • Filtrage stopwords (NLTK + perso)     │
-                    └─────┬─────┘
-                          │  df_discours, lemmes_filtres
-          ┌───────────────┼──────────────────────┐
-          │               │                      │
-    ┌─────▼─────┐   ┌─────▼─────┐         ┌─────▼─────┐
-    │ 02 Fréq.  │   │ 03 N-gram │         │ 04 TF-IDF │
-    │  Wordcloud│   │ Bi / Tri  │         │ par année │
-    └───────────┘   └───────────┘         └───────────┘
-          │
-    ┌─────▼──────────────────────────────────────┐
-    │             05 Sentiments                   │
-    │  Optimisme / Pessimisme / Incertitude / Stabilité│
-    └─────┬──────────────────────────────────────┘
-          │
-    ┌─────▼──────────────────────────────────────┐
-    │     06 AFC (SVD) + K-Means (k=3)            │
-    │  Hawkish / Dovish par cluster               │
-    └─────┬──────────────────────────────────────┘
-          │
-    ┌─────▼──────────────────────────────────────┐
-    │     07 Thèmes                               │
-    │  Inflation / Labor / Growth / Rates         │
-    └─────┬──────────────────────────────────────┘
-          │
-    ┌─────▼──────────────────────────────────────┐
-    │     08 Marchés (yfinance)                   │
-    │  Corrélations thèmes × variations (J→J+30)  │
-    │  SPY / NASDAQ / BTC                         │
-    └────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    %% Définitions de style
+    classDef source fill:#f8f9fa,stroke:#adb5bd,stroke-width:2px,color:#212529
+    classDef prep fill:#e7f5ff,stroke:#339af0,stroke-width:2px,color:#0b7285
+    classDef desc fill:#fff3bf,stroke:#fcc419,stroke-width:2px,color:#d9480f
+    classDef model fill:#f3f0ff,stroke:#845ef7,stroke-width:2px,color:#5f3dc4
+    classDef finance fill:#ebfbee,stroke:#51cf66,stroke-width:2px,color:#2b8a3e
+
+    %% Nœuds
+    DB[("📄 Corpus FOMC\n(Transcriptions .txt)")]:::source
+    
+    P1["<b>01. Prétraitement</b><br/>• Tokenisation (alpha, lowercase)<br/>• POS tagging (Penn Treebank)<br/>• Lemmatisation (noms + adjectifs)<br/>• Filtrage stopwords (NLTK + perso)"]:::prep
+
+    subgraph Analyses Descriptives
+        A1["<b>02. Fréquences</b><br/>Wordcloud"]:::desc
+        A2["<b>03. N-grammes</b><br/>Bi / Tri"]:::desc
+        A3["<b>04. TF-IDF</b><br/>Par année"]:::desc
+    end
+
+    subgraph Analyses Sémantiques & Thématiques
+        M1["<b>05. Sentiments</b><br/>Optimisme, Pessimisme,<br/>Incertitude, Stabilité"]:::model
+        M2["<b>06. AFC & Clustering</b><br/>SVD + K-Means (k=3)<br/>Hawkish / Dovish"]:::model
+        M3["<b>07. Thèmes Macro</b><br/>Inflation, Labor, Growth, Rates"]:::model
+    end
+
+    F["<b>08. Marchés Financiers (yfinance)</b><br/>Corrélations thèmes/sentiments × variations<br/>S&P 500 / NASDAQ / BTC (J à J+30)"]:::finance
+
+    %% Connexions
+    DB --> P1
+    
+    P1 ==>|df_discours,<br/>lemmes_filtres| A1
+    P1 ==>|df_discours,<br/>lemmes_filtres| A2
+    P1 ==>|df_discours,<br/>lemmes_filtres| A3
+    
+    P1 ==>|df_discours,<br/>lemmes_filtres| M1
+    P1 ==>|df_discours,<br/>lemmes_filtres| M2
+    P1 ==>|df_discours,<br/>lemmes_filtres| M3
+
+    M1 -.->|"Scores<br/>tonalités"| F
+    M3 -.->|"Scores<br/>thématiques"| F
 ```
 
 ---
